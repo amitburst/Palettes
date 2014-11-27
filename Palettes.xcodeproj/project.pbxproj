@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D719E9291A26D49E00E6CF1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E9281A26D49E00E6CF1F /* AppDelegate.swift */; };
+		D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E92A1A26D49E00E6CF1F /* ViewController.swift */; };
+		D719E92D1A26D49E00E6CF1F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D719E92C1A26D49E00E6CF1F /* Images.xcassets */; };
+		D719E9301A26D49E00E6CF1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D719E92E1A26D49E00E6CF1F /* Main.storyboard */; };
+		D719E93C1A26D49E00E6CF1F /* PalettesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E93B1A26D49E00E6CF1F /* PalettesTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D719E9361A26D49E00E6CF1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D719E91B1A26D49E00E6CF1F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D719E9221A26D49E00E6CF1F;
+			remoteInfo = Palettes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D719E9231A26D49E00E6CF1F /* Palettes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palettes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D719E9271A26D49E00E6CF1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D719E9281A26D49E00E6CF1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D719E92A1A26D49E00E6CF1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D719E92C1A26D49E00E6CF1F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D719E92F1A26D49E00E6CF1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D719E9351A26D49E00E6CF1F /* PalettesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalettesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D719E93A1A26D49E00E6CF1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D719E93B1A26D49E00E6CF1F /* PalettesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettesTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D719E9201A26D49E00E6CF1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D719E9321A26D49E00E6CF1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D719E91A1A26D49E00E6CF1F = {
+			isa = PBXGroup;
+			children = (
+				D719E9251A26D49E00E6CF1F /* Palettes */,
+				D719E9381A26D49E00E6CF1F /* PalettesTests */,
+				D719E9241A26D49E00E6CF1F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D719E9241A26D49E00E6CF1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D719E9231A26D49E00E6CF1F /* Palettes.app */,
+				D719E9351A26D49E00E6CF1F /* PalettesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D719E9251A26D49E00E6CF1F /* Palettes */ = {
+			isa = PBXGroup;
+			children = (
+				D719E9281A26D49E00E6CF1F /* AppDelegate.swift */,
+				D719E92A1A26D49E00E6CF1F /* ViewController.swift */,
+				D719E92C1A26D49E00E6CF1F /* Images.xcassets */,
+				D719E92E1A26D49E00E6CF1F /* Main.storyboard */,
+				D719E9261A26D49E00E6CF1F /* Supporting Files */,
+			);
+			path = Palettes;
+			sourceTree = "<group>";
+		};
+		D719E9261A26D49E00E6CF1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D719E9271A26D49E00E6CF1F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D719E9381A26D49E00E6CF1F /* PalettesTests */ = {
+			isa = PBXGroup;
+			children = (
+				D719E93B1A26D49E00E6CF1F /* PalettesTests.swift */,
+				D719E9391A26D49E00E6CF1F /* Supporting Files */,
+			);
+			path = PalettesTests;
+			sourceTree = "<group>";
+		};
+		D719E9391A26D49E00E6CF1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D719E93A1A26D49E00E6CF1F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D719E9221A26D49E00E6CF1F /* Palettes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D719E93F1A26D49E00E6CF1F /* Build configuration list for PBXNativeTarget "Palettes" */;
+			buildPhases = (
+				D719E91F1A26D49E00E6CF1F /* Sources */,
+				D719E9201A26D49E00E6CF1F /* Frameworks */,
+				D719E9211A26D49E00E6CF1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Palettes;
+			productName = Palettes;
+			productReference = D719E9231A26D49E00E6CF1F /* Palettes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D719E9341A26D49E00E6CF1F /* PalettesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D719E9421A26D49E00E6CF1F /* Build configuration list for PBXNativeTarget "PalettesTests" */;
+			buildPhases = (
+				D719E9311A26D49E00E6CF1F /* Sources */,
+				D719E9321A26D49E00E6CF1F /* Frameworks */,
+				D719E9331A26D49E00E6CF1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D719E9371A26D49E00E6CF1F /* PBXTargetDependency */,
+			);
+			name = PalettesTests;
+			productName = PalettesTests;
+			productReference = D719E9351A26D49E00E6CF1F /* PalettesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D719E91B1A26D49E00E6CF1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Amit Burstein";
+				TargetAttributes = {
+					D719E9221A26D49E00E6CF1F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					D719E9341A26D49E00E6CF1F = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = D719E9221A26D49E00E6CF1F;
+					};
+				};
+			};
+			buildConfigurationList = D719E91E1A26D49E00E6CF1F /* Build configuration list for PBXProject "Palettes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D719E91A1A26D49E00E6CF1F;
+			productRefGroup = D719E9241A26D49E00E6CF1F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D719E9221A26D49E00E6CF1F /* Palettes */,
+				D719E9341A26D49E00E6CF1F /* PalettesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D719E9211A26D49E00E6CF1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D719E92D1A26D49E00E6CF1F /* Images.xcassets in Resources */,
+				D719E9301A26D49E00E6CF1F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D719E9331A26D49E00E6CF1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D719E91F1A26D49E00E6CF1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */,
+				D719E9291A26D49E00E6CF1F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D719E9311A26D49E00E6CF1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D719E93C1A26D49E00E6CF1F /* PalettesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D719E9371A26D49E00E6CF1F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D719E9221A26D49E00E6CF1F /* Palettes */;
+			targetProxy = D719E9361A26D49E00E6CF1F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D719E92E1A26D49E00E6CF1F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D719E92F1A26D49E00E6CF1F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D719E93D1A26D49E00E6CF1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D719E93E1A26D49E00E6CF1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D719E9401A26D49E00E6CF1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Palettes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D719E9411A26D49E00E6CF1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Palettes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D719E9431A26D49E00E6CF1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PalettesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palettes.app/Contents/MacOS/Palettes";
+			};
+			name = Debug;
+		};
+		D719E9441A26D49E00E6CF1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PalettesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palettes.app/Contents/MacOS/Palettes";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D719E91E1A26D49E00E6CF1F /* Build configuration list for PBXProject "Palettes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D719E93D1A26D49E00E6CF1F /* Debug */,
+				D719E93E1A26D49E00E6CF1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D719E93F1A26D49E00E6CF1F /* Build configuration list for PBXNativeTarget "Palettes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D719E9401A26D49E00E6CF1F /* Debug */,
+				D719E9411A26D49E00E6CF1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D719E9421A26D49E00E6CF1F /* Build configuration list for PBXNativeTarget "PalettesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D719E9431A26D49E00E6CF1F /* Debug */,
+				D719E9441A26D49E00E6CF1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D719E91B1A26D49E00E6CF1F /* Project object */;
+}
