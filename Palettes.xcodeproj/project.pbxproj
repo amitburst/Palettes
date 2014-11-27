@@ -13,6 +13,8 @@
 		D719E92D1A26D49E00E6CF1F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D719E92C1A26D49E00E6CF1F /* Images.xcassets */; };
 		D719E9301A26D49E00E6CF1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D719E92E1A26D49E00E6CF1F /* Main.storyboard */; };
 		D719E93C1A26D49E00E6CF1F /* PalettesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719E93B1A26D49E00E6CF1F /* PalettesTests.swift */; };
+		D7AFD93A1A27092A00FC9000 /* PaletteTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */; };
+		D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,8 @@
 		D719E9351A26D49E00E6CF1F /* PalettesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalettesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D719E93A1A26D49E00E6CF1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D719E93B1A26D49E00E6CF1F /* PalettesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettesTests.swift; sourceTree = "<group>"; };
+		D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCellView.swift; sourceTree = "<group>"; };
+		D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 			children = (
 				D719E9281A26D49E00E6CF1F /* AppDelegate.swift */,
 				D719E92A1A26D49E00E6CF1F /* ViewController.swift */,
+				D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */,
+				D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */,
 				D719E92C1A26D49E00E6CF1F /* Images.xcassets */,
 				D719E92E1A26D49E00E6CF1F /* Main.storyboard */,
 				D719E9261A26D49E00E6CF1F /* Supporting Files */,
@@ -269,7 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7AFD93A1A27092A00FC9000 /* PaletteTableCellView.swift in Sources */,
 				D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */,
+				D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */,
 				D719E9291A26D49E00E6CF1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
