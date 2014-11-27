@@ -12,6 +12,16 @@ class PaletteTableCellView: NSTableCellView {
     
     // MARK: Properties
     
+    var colors = [String]()
     @IBOutlet weak var colorView: NSView!
+    
+    // MARK: NSResponder
+    
+    override func mouseDown(theEvent: NSEvent) {
+        let width = ceil(colorView.bounds.width / CGFloat(colorView.subviews.count))
+        let startX = colorView.frame.origin.x
+        let colorIndex = Int(floor((theEvent.locationInWindow.x - startX) / width))
+        println(colors[colorIndex])
+    }
     
 }

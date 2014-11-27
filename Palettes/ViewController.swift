@@ -13,7 +13,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: Properties
     
     let manager = AFHTTPRequestOperationManager()
-    var palettes = Array<Palette>()
+    var palettes = [Palette]()
     @IBOutlet weak var tableView: NSTableView!
     let topPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
     
@@ -53,6 +53,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         result.textField?.stringValue = palettes[row].title!
         result.colorView.wantsLayer = true
         result.colorView.layer?.cornerRadius = 5
+        result.colors = palettes[row].colors!
         
         let width = ceil(result.colorView.bounds.width / CGFloat(palettes[row].colors!.count))
         let height = result.colorView.bounds.height

@@ -738,13 +738,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="114" horizontalPageScroll="10" verticalLineScroll="114" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-gE-mOc">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="112" horizontalPageScroll="10" verticalLineScroll="112" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-gE-mOc">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
                                 <clipView key="contentView" id="wpK-9q-oMP">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="112" rowSizeStyle="automatic" viewBased="YES" id="PLA-IL-pFt">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="110" rowSizeStyle="automatic" viewBased="YES" id="PLA-IL-pFt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -765,11 +765,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="PaletteCell" id="bPe-FY-55M" customClass="PaletteTableCellView" customModule="Palettes" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="247" height="112"/>
+                                                            <rect key="frame" x="1" y="1" width="247" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYL-XK-3hM">
-                                                                    <rect key="frame" x="13" y="13" width="224" height="17"/>
+                                                                    <rect key="frame" x="13" y="11" width="224" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fRp-jm-gwH">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -777,7 +777,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-nZ-Q5l">
-                                                                    <rect key="frame" x="15" y="38" width="220" height="60"/>
+                                                                    <rect key="frame" x="15" y="36" width="220" height="60"/>
                                                                 </customView>
                                                             </subviews>
                                                             <connections>
