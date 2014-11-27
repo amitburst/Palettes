@@ -675,6 +675,45 @@
                                         </searchFieldCell>
                                     </searchField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1545B6D1-635E-40EB-8DB6-997D59BC0087" label="Custom View" paletteLabel="Custom View" id="W8I-bU-yrW">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="99" height="26"/>
+                                    <size key="maxSize" width="99" height="26"/>
+                                    <comboBox key="view" verticalHuggingPriority="750" id="ZYj-9x-kPn">
+                                        <rect key="frame" x="0.0" y="0.0" width="99" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="oqW-9O-ey5">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <objectValues>
+                                                <string>Item 1</string>
+                                                <string>Item 2</string>
+                                                <string>Item 3</string>
+                                            </objectValues>
+                                        </comboBoxCell>
+                                    </comboBox>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="8B63873A-CDF2-4453-93E9-840A77FBBD88" label="Custom View" paletteLabel="Custom View" id="szg-Ho-TRr">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="qmz-zl-7aH">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="iHk-rb-iIW" id="1ex-ma-4w2">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="O0s-vJ-WCv">
+                                                <items>
+                                                    <menuItem title="Item 1" state="on" id="iHk-rb-iIW"/>
+                                                    <menuItem title="Item 2" id="slr-gI-ou2"/>
+                                                    <menuItem title="Item 3" id="YKK-WI-bEi"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="bfx-19-zJr"/>
@@ -699,17 +738,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="114" horizontalPageScroll="10" verticalLineScroll="114" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-gE-mOc">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="114" horizontalPageScroll="10" verticalLineScroll="114" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-gE-mOc">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
-                                <clipView key="contentView" ambiguous="YES" misplaced="YES" id="wpK-9q-oMP">
+                                <clipView key="contentView" id="wpK-9q-oMP">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="112" rowSizeStyle="automatic" viewBased="YES" id="PLA-IL-pFt">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="112" rowSizeStyle="automatic" viewBased="YES" id="PLA-IL-pFt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
+                                            <color key="gridColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="247" minWidth="40" maxWidth="1000" id="Qr9-i3-9MC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
@@ -729,15 +769,15 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYL-XK-3hM">
-                                                                    <rect key="frame" x="0.0" y="15" width="246" height="97"/>
+                                                                    <rect key="frame" x="13" y="13" width="224" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fRp-jm-gwH">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-nZ-Q5l">
-                                                                    <rect key="frame" x="3" y="34" width="241" height="59"/>
+                                                                    <rect key="frame" x="15" y="38" width="220" height="60"/>
                                                                 </customView>
                                                             </subviews>
                                                             <connections>
@@ -766,6 +806,12 @@
                                 </scroller>
                             </scrollView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MLI-gE-mOc" secondAttribute="trailing" id="8Gq-Ug-uWs"/>
+                            <constraint firstAttribute="bottom" secondItem="MLI-gE-mOc" secondAttribute="bottom" id="AKc-jj-B37"/>
+                            <constraint firstItem="MLI-gE-mOc" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="FQ4-2r-Hf1"/>
+                            <constraint firstItem="MLI-gE-mOc" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="vbV-xQ-RxZ"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="PLA-IL-pFt" id="dmC-NE-pKj"/>

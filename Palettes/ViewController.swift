@@ -41,7 +41,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: NSTableViewDelegate
     
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 100
+        return 110
+    }
+    
+    func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
+        return NSIndexSet()
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -54,7 +58,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let height = result.colorView.bounds.height
         for var i = 0; i < palettes[row].colors!.count; i++ {
             let view = NSView(frame: CGRectMake(CGFloat(i) * width, 0, width, height))
-            view.alphaValue = 1
             view.wantsLayer = true
             view.layer?.backgroundColor = NSColor(rgba: "#\(palettes[row].colors![i])").CGColor
             result.colorView.addSubview(view)
