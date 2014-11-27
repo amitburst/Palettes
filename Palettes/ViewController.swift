@@ -10,14 +10,52 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    // MARK: Properties
+    
+    let manager = AFHTTPRequestOperationManager()
+    var palettes = Array<Palette>()
+    let topPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
+    
+    // MARK: Structs
+    
+    struct Palette {
+        var url: String?
+        var colors: Array<String>?
+        var title: String?
+    }
+    
+    // MARK: NSViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        getTopPalettes()
     }
-
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
+    
+    // MARK: Functions
+    
+    func getTopPalettes() {
+        manager.GET(topPalettesEndpoint, parameters: nil, success: { _, responseObject in
+            // Should get a JSON array back
+            if let jsonArray = responseObject as? Array<NSDictionary> {
+                for paletteInfo in jsonArray {
+                    // Extract fields from JSON object
+                    let url = paletteInfo.objectForKey("urll") as? String
+                    let colors = paletteInfo.objectForKey("colors") as? Array<String>
+                    let title = paletteInfo.objectForKey("title") as? String
+                    
+                    // Don't add to palettes array if any fields are nil
+                    if url == nil || colors == nil || title == nil {
+                        continue
+                    }
+                    
+                    // Add to palettes array
+                    self.palettes.append(Palette(url: url!, colors: colors!, title: title!))
+                }
+            } else {
+                println("Could not load JSON...")
+            }
+        }) { _, error in
+            println(error.localizedDescription)
         }
     }
 
