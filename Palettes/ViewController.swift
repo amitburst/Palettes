@@ -27,7 +27,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var copyView = NSView(frame: CGRectMake(0, -40, 250, 40))
     var copyViewPositionAnim = POPSpringAnimation()
     var copyViewPositionReverseAnim = POPSpringAnimation()
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tableView: MainTableView!
     
     // MARK: Structs
     
@@ -147,6 +147,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
+                    self.tableView.scrollRowToVisible(0, animate: true)
                 })
             } else {
                 println("Could not load JSON...")
