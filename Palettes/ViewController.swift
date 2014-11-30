@@ -72,6 +72,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         
         let width = ceil(cellView.colorView.bounds.width / CGFloat(palettes[row].colors!.count))
         let height = cellView.colorView.bounds.height
+        cellView.colorView.subviews = []
         for var i = 0; i < palettes[row].colors!.count; i++ {
             let colorView = NSView(frame: CGRectMake(CGFloat(i) * width, 0, width, height))
             colorView.wantsLayer = true
@@ -91,7 +92,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 showingTopPalettes = true
             }
         } else {
-            getPalettes(palettesEndpoint, params: ["keywords": searchField.stringValue])
+            if let match = searchField.stringValue.rangeOfString("^[0-9a-fA-F]{6}$", options: .RegularExpressionSearch) {
+                getPalettes(palettesEndpoint, params: ["hex": searchField.stringValue])
+            } else {
+                getPalettes(palettesEndpoint, params: ["keywords": searchField.stringValue])
+            }
             showingTopPalettes = false
         }
     }
