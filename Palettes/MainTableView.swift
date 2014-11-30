@@ -10,6 +10,15 @@ import Cocoa
 
 class MainTableView: NSTableView {
     
+    // MARK: NSTableView
+    
+    override func drawGridInClipRect(clipRect: NSRect) {
+        let lastRowRect = rectOfRow(numberOfRows - 1)
+        let myClipRect = NSMakeRect(0, 0, lastRowRect.size.width, NSMaxY(lastRowRect))
+        let finalClipRect = NSIntersectionRect(clipRect, myClipRect)
+        super.drawGridInClipRect(finalClipRect)
+    }
+    
     // MARK: Functions
     
     func scrollRowToVisible(row: Int, animate: Bool) {
