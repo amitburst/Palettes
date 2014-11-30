@@ -40,7 +40,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCopyView()
-        getTopPalettes()
+        getTopPalettes(topPalettesEndpoint)
     }
     
     // MARK: NSTableViewDataSource
@@ -83,6 +83,16 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func setupCopyView() {
         copyView.wantsLayer = true
         copyView.layer?.backgroundColor = NSColor(rgba: "#67809FE6").CGColor
+        let copyViewTextField = NSTextField(frame: CGRectMake(0, 0, 250, 40))
+        copyViewTextField.bezeled = false
+        copyViewTextField.drawsBackground = false
+        copyViewTextField.editable = false
+        copyViewTextField.selectable = false
+        copyViewTextField.alignment = .CenterTextAlignment
+        copyViewTextField.textColor = NSColor(rgba: "#ECF0F1")
+        copyViewTextField.font = NSFont.boldSystemFontOfSize(12)
+        copyViewTextField.stringValue = "Copied!"
+        copyView.addSubview(copyViewTextField)
         view.addSubview(copyView)
         
         copyViewPositionAnim.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
@@ -97,17 +107,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
         copyViewPositionAnim.completionBlock = { _, _ in
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                self.copyView.layer!.pop_addAnimation(self.copyViewPositionReverseAnim, forKey: "position")
+                self.copyView.layer!.pop_addAnimation(self.copyViewPositionReverseAnim, forKey: nil)
             })
         }
     }
     
-    func getTopPalettes() {
-        manager.GET(topPalettesEndpoint, parameters: nil, success: { _, responseObject in
-            if let jsonArray = responseObject as? Array<NSDictionary> {
+    func getTopPalettes(endpoint: String) {
+        manager.GET(endpoint, parameters: nil, success: { _, responseObject in
+            if let jsonArray = responseObject as? [NSDictionary] {
                 for paletteInfo in jsonArray {
                     let url = paletteInfo.objectForKey("url") as? String
-                    let colors = paletteInfo.objectForKey("colors") as? Array<String>
+                    let colors = paletteInfo.objectForKey("colors") as? [String]
                     let title = paletteInfo.objectForKey("title") as? String
                     self.palettes.append(Palette(url: url!, colors: colors!, title: title!))
                 }

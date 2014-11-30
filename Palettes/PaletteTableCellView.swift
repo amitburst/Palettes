@@ -30,7 +30,7 @@ class PaletteTableCellView: NSTableCellView {
         
         // Show copy view
         let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as ViewController
-        viewController.copyView.layer?.pop_addAnimation(viewController.copyViewPositionAnim, forKey: "position")
+        viewController.copyView.layer?.pop_addAnimation(viewController.copyViewPositionAnim, forKey: nil)
     }
     
 }
