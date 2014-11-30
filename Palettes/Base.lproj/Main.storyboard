@@ -656,10 +656,6 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="EB2C5CE8-533A-4ED5-9B79-B0E19AE7EED7" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="WE8-di-38p">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="UhG-G8-cLn"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="KDG-Cw-paB"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="oDq-e9-WGH"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="kRX-KM-HZB"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bfx-19-zJr"/>
                                 <toolbarItem implicitItemIdentifier="EE40B774-CB72-459C-8EA7-5C194D07D59E" label="Custom View" paletteLabel="Custom View" id="7ZZ-rw-FMC">
                                     <nil key="toolTip"/>
@@ -668,51 +664,15 @@
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="0EP-dd-NY9">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="M9H-XO-qzA">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="M9H-XO-qzA">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                     </searchField>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="1545B6D1-635E-40EB-8DB6-997D59BC0087" label="Custom View" paletteLabel="Custom View" id="W8I-bU-yrW">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="99" height="26"/>
-                                    <size key="maxSize" width="99" height="26"/>
-                                    <comboBox key="view" verticalHuggingPriority="750" id="ZYj-9x-kPn">
-                                        <rect key="frame" x="0.0" y="0.0" width="99" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="oqW-9O-ey5">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <objectValues>
-                                                <string>Item 1</string>
-                                                <string>Item 2</string>
-                                                <string>Item 3</string>
-                                            </objectValues>
-                                        </comboBoxCell>
-                                    </comboBox>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="8B63873A-CDF2-4453-93E9-840A77FBBD88" label="Custom View" paletteLabel="Custom View" id="szg-Ho-TRr">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="100" height="28"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="qmz-zl-7aH">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="iHk-rb-iIW" id="1ex-ma-4w2">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="O0s-vJ-WCv">
-                                                <items>
-                                                    <menuItem title="Item 1" state="on" id="iHk-rb-iIW"/>
-                                                    <menuItem title="Item 2" id="slr-gI-ou2"/>
-                                                    <menuItem title="Item 3" id="YKK-WI-bEi"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                    </popUpButton>
+                                    <connections>
+                                        <action selector="searchFieldChanged:" target="Oky-zY-oP4" id="AOy-jR-Hus"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>

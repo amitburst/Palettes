@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate {
 
     // MARK: Constants
     
@@ -16,12 +16,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let colorViewCornerRadius: CGFloat = 5
     let copyViewPositionAnimSpringBounciness: CGFloat = 20
     let copyViewPositionAnimSpringSpeed: CGFloat = 15
+    let palettesEndpoint = "http://www.colourlovers.com/api/palettes?format=json"
     let topPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
     
     // MARK: Properties
     
     let manager = AFHTTPRequestOperationManager()
     var palettes = [Palette]()
+    var showingTopPalettes = true
     var copyView = NSView(frame: CGRectMake(0, -40, 250, 40))
     var copyViewPositionAnim = POPSpringAnimation()
     var copyViewPositionReverseAnim = POPSpringAnimation()
@@ -39,8 +41,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var window = NSApplication.sharedApplication().windows[0] as NSWindow
+        window.delegate = self;
         setupCopyView()
-        getTopPalettes(topPalettesEndpoint)
+        getPalettes(topPalettesEndpoint, params: nil)
     }
     
     // MARK: NSTableViewDataSource
@@ -78,6 +82,20 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return cellView
     }
     
+    // MARK: IBActions
+    
+    @IBAction func searchFieldChanged(searchField: NSSearchField!) {
+        if searchField.stringValue == "" {
+            if !showingTopPalettes {
+                getPalettes(topPalettesEndpoint, params: nil)
+                showingTopPalettes = true
+            }
+        } else {
+            getPalettes(palettesEndpoint, params: ["keywords": searchField.stringValue])
+            showingTopPalettes = false
+        }
+    }
+    
     // MARK: Functions
     
     func setupCopyView() {
@@ -112,9 +130,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
     
-    func getTopPalettes(endpoint: String) {
-        manager.GET(endpoint, parameters: nil, success: { _, responseObject in
+    func getPalettes(endpoint: String, params: [String:String]?) {
+        manager.GET(endpoint, parameters: params, success: { operation, responseObject in
             if let jsonArray = responseObject as? [NSDictionary] {
+                self.palettes.removeAll()
                 for paletteInfo in jsonArray {
                     let url = paletteInfo.objectForKey("url") as? String
                     let colors = paletteInfo.objectForKey("colors") as? [String]

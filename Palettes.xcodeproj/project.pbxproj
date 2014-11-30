@@ -100,8 +100,8 @@
 				D719E92A1A26D49E00E6CF1F /* ViewController.swift */,
 				D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */,
 				D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */,
-				D719E92C1A26D49E00E6CF1F /* Images.xcassets */,
 				D719E92E1A26D49E00E6CF1F /* Main.storyboard */,
+				D719E92C1A26D49E00E6CF1F /* Images.xcassets */,
 				D719E9261A26D49E00E6CF1F /* Supporting Files */,
 			);
 			path = Palettes;
