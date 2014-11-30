@@ -10,5 +10,6 @@
 #define Palettes_Palettes_Bridging_Header_h
 
 #import "AFNetworking.h"
+#import "pop.h"
 
 #endif

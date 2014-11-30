@@ -18,10 +18,19 @@ class PaletteTableCellView: NSTableCellView {
     // MARK: NSResponder
     
     override func mouseDown(theEvent: NSEvent) {
-        let width = ceil(colorView.bounds.width / CGFloat(colorView.subviews.count))
-        let startX = colorView.frame.origin.x
-        let colorIndex = Int(floor((theEvent.locationInWindow.x - startX) / width))
-        println(colors[colorIndex])
+        // Get index of selected color
+        let colorWidth = ceil(colorView.bounds.width / CGFloat(colorView.subviews.count))
+        let colorStartX = colorView.frame.origin.x
+        let colorIndex = Int(floor((theEvent.locationInWindow.x - colorStartX) / colorWidth))
+        
+        // Copy color to clipboard
+        let pasteboard = NSPasteboard.generalPasteboard()
+        pasteboard.clearContents()
+        pasteboard.writeObjects([colors[colorIndex]])
+        
+        // Show copy view
+        let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as ViewController
+        viewController.copyView.layer?.pop_addAnimation(viewController.copyViewPositionAnim, forKey: "position")
     }
     
 }
