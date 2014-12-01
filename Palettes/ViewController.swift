@@ -12,29 +12,37 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     // MARK: Constants
     
-    let rowHeight: CGFloat = 110
-    let colorViewCornerRadius: CGFloat = 5
-    let copyViewPositionAnimSpringBounciness: CGFloat = 20
-    let copyViewPositionAnimSpringSpeed: CGFloat = 15
-    let palettesEndpoint = "http://www.colourlovers.com/api/palettes?format=json"
-    let topPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
+    let RowHeight = 110
+    let PaletteViewCornerRadius = 5
+    let CopiedViewAnimationSpringBounciness = 20
+    let CopiedViewAnimationSpringSpeed = 15
+    let CopiedViewAnimationToValue = -20
+    let CopiedViewReverseAnimationToValue = -40
+    let CopiedViewHeight = 40
+    let CopiedViewBackgroundColor = "#67809FE6"
+    let CopiedViewText = "Copied!"
+    let CopiedViewTextSize = 12
+    let CopiedViewTextColor = "#ECF0F1"
+    let PaletteCellIdentifier = "PaletteCell"
+    let PalettesEndpoint = "http://www.colourlovers.com/api/palettes?format=json"
+    let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
     
     // MARK: Properties
     
-    let manager = AFHTTPRequestOperationManager()
+    var manager = AFHTTPRequestOperationManager()
     var palettes = [Palette]()
     var showingTopPalettes = true
-    var copyView = NSView(frame: CGRectMake(0, -40, 250, 40))
-    var copyViewPositionAnim = POPSpringAnimation()
-    var copyViewPositionReverseAnim = POPSpringAnimation()
+    var copiedView = NSView()
+    var copiedViewAnimation = POPSpringAnimation()
+    var copiedViewReverseAnimation = POPSpringAnimation()
     @IBOutlet weak var tableView: MainTableView!
     
     // MARK: Structs
     
     struct Palette {
-        var url: String?
-        var colors: [String]?
-        var title: String?
+        var url: String
+        var colors: [String]
+        var title: String
     }
     
     // MARK: NSViewController
@@ -42,9 +50,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         var window = NSApplication.sharedApplication().windows[0] as NSWindow
-        window.delegate = self;
-        setupCopyView()
-        getPalettes(topPalettesEndpoint, params: nil)
+        window.delegate = self
+        setupCopiedView()
+        getPalettes(endpoint: TopPalettesEndpoint, params: nil)
     }
     
     // MARK: NSTableViewDataSource
@@ -56,7 +64,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: NSTableViewDelegate
     
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return rowHeight
+        return CGFloat(RowHeight)
     }
     
     func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
@@ -64,23 +72,33 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cellView = tableView.makeViewWithIdentifier("PaletteCell", owner: self) as PaletteTableCellView
-        cellView.textField?.stringValue = palettes[row].title!
-        cellView.colorView.wantsLayer = true
-        cellView.colorView.layer?.cornerRadius = colorViewCornerRadius
-        cellView.colors = palettes[row].colors!
+        // Create and get references to other important items
+        let cell = tableView.makeViewWithIdentifier(PaletteCellIdentifier, owner: self) as PaletteTableCellView
+        let paletteView = cell.paletteView
+        let palette = palettes[row]
         
-        let width = ceil(cellView.colorView.bounds.width / CGFloat(palettes[row].colors!.count))
-        let height = cellView.colorView.bounds.height
-        cellView.colorView.subviews = []
-        for var i = 0; i < palettes[row].colors!.count; i++ {
-            let colorView = NSView(frame: CGRectMake(CGFloat(i) * width, 0, width, height))
+        // Set cell properties
+        cell.textField?.stringValue = palette.title
+        cell.colors = palette.colors
+        
+        // Set cell's palette view properties
+        paletteView.wantsLayer = true
+        paletteView.layer?.cornerRadius = CGFloat(PaletteViewCornerRadius)
+        paletteView.subviews = []
+        
+        // Calculate width and height of each color view
+        let colorViewWidth = ceil(paletteView.bounds.width / CGFloat(cell.colors.count))
+        let colorViewHeight = paletteView.bounds.height
+        
+        // Create and append color views to palette view
+        for i in 0..<cell.colors.count {
+            let colorView = NSView(frame: CGRectMake(CGFloat(i) * colorViewWidth, 0, colorViewWidth, colorViewHeight))
             colorView.wantsLayer = true
-            colorView.layer?.backgroundColor = NSColor(rgba: "#\(palettes[row].colors![i])").CGColor
-            cellView.colorView.addSubview(colorView)
+            colorView.layer?.backgroundColor = NSColor(rgba: "#\(cell.colors[i])").CGColor
+            paletteView.addSubview(colorView)
         }
 
-        return cellView
+        return cell
     }
     
     // MARK: IBActions
@@ -88,14 +106,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBAction func searchFieldChanged(searchField: NSSearchField!) {
         if searchField.stringValue == "" {
             if !showingTopPalettes {
-                getPalettes(topPalettesEndpoint, params: nil)
+                getPalettes(endpoint: TopPalettesEndpoint, params: nil)
                 showingTopPalettes = true
             }
         } else {
             if let match = searchField.stringValue.rangeOfString("^[0-9a-fA-F]{6}$", options: .RegularExpressionSearch) {
-                getPalettes(palettesEndpoint, params: ["hex": searchField.stringValue])
+                getPalettes(endpoint: PalettesEndpoint, params: ["hex": searchField.stringValue])
             } else {
-                getPalettes(palettesEndpoint, params: ["keywords": searchField.stringValue])
+                getPalettes(endpoint: PalettesEndpoint, params: ["keywords": searchField.stringValue])
             }
             showingTopPalettes = false
         }
@@ -103,39 +121,39 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     // MARK: Functions
     
-    func setupCopyView() {
-        copyView.wantsLayer = true
-        copyView.layer?.backgroundColor = NSColor(rgba: "#67809FE6").CGColor
-        let copyViewTextField = NSTextField(frame: CGRectMake(0, 0, 250, 40))
-        copyViewTextField.bezeled = false
-        copyViewTextField.drawsBackground = false
-        copyViewTextField.editable = false
-        copyViewTextField.selectable = false
-        copyViewTextField.alignment = .CenterTextAlignment
-        copyViewTextField.textColor = NSColor(rgba: "#ECF0F1")
-        copyViewTextField.font = NSFont.boldSystemFontOfSize(12)
-        copyViewTextField.stringValue = "Copied!"
-        copyView.addSubview(copyViewTextField)
-        view.addSubview(copyView)
+    func setupCopiedView() {
+        // Set up copied view text
+        let copiedViewTextField = NSTextField(frame: CGRectMake(0, 0, view.bounds.width, CGFloat(CopiedViewHeight)))
+        copiedViewTextField.bezeled = false
+        copiedViewTextField.drawsBackground = false
+        copiedViewTextField.editable = false
+        copiedViewTextField.selectable = false
+        copiedViewTextField.alignment = .CenterTextAlignment
+        copiedViewTextField.textColor = NSColor(rgba: CopiedViewTextColor)
+        copiedViewTextField.font = NSFont.boldSystemFontOfSize(CGFloat(CopiedViewTextSize))
+        copiedViewTextField.stringValue = CopiedViewText
         
-        copyViewPositionAnim.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
-        copyViewPositionAnim.toValue = -20
-        copyViewPositionAnim.springBounciness = copyViewPositionAnimSpringBounciness
-        copyViewPositionAnim.springSpeed = copyViewPositionAnimSpringSpeed
+        // Set up copied view
+        copiedView = NSView(frame: CGRectMake(0, CGFloat(-CopiedViewHeight), view.bounds.width, CGFloat(CopiedViewHeight)))
+        copiedView.addSubview(copiedViewTextField)
+        copiedView.wantsLayer = true
+        copiedView.layer?.backgroundColor = NSColor(rgba: CopiedViewBackgroundColor).CGColor
+        view.addSubview(copiedView)
         
-        copyViewPositionReverseAnim.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
-        copyViewPositionReverseAnim.toValue = -40
-        copyViewPositionReverseAnim.springBounciness = copyViewPositionAnimSpringBounciness
-        copyViewPositionReverseAnim.springSpeed = copyViewPositionAnimSpringSpeed
-
-        copyViewPositionAnim.completionBlock = { _, _ in
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
-                self.copyView.layer!.pop_addAnimation(self.copyViewPositionReverseAnim, forKey: nil)
-            })
-        }
+        // Set up copied view animation
+        copiedViewAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
+        copiedViewAnimation.toValue = CopiedViewAnimationToValue
+        copiedViewAnimation.springBounciness = CGFloat(CopiedViewAnimationSpringBounciness)
+        copiedViewAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
+        
+        // Set up copied view reverse animation
+        copiedViewReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
+        copiedViewReverseAnimation.toValue = CopiedViewReverseAnimationToValue
+        copiedViewReverseAnimation.springBounciness = CGFloat(CopiedViewAnimationSpringBounciness)
+        copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
     }
     
-    func getPalettes(endpoint: String, params: [String:String]?) {
+    func getPalettes(#endpoint: String, params: [String:String]?) {
         manager.GET(endpoint, parameters: params, success: { operation, responseObject in
             if let jsonArray = responseObject as? [NSDictionary] {
                 self.palettes.removeAll()

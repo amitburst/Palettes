@@ -695,11 +695,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Palettes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="335"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="112" horizontalPageScroll="10" verticalLineScroll="112" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLI-gE-mOc">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="350"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="335"/>
                                 <clipView key="contentView" id="wpK-9q-oMP">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -741,7 +741,7 @@
                                                                 </customView>
                                                             </subviews>
                                                             <connections>
-                                                                <outlet property="colorView" destination="lmt-nZ-Q5l" id="ftG-84-GoQ"/>
+                                                                <outlet property="paletteView" destination="lmt-nZ-Q5l" id="Y8V-6D-B4c"/>
                                                                 <outlet property="textField" destination="RYL-XK-3hM" id="C1p-6n-76T"/>
                                                             </connections>
                                                         </tableCellView>
@@ -767,10 +767,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="MLI-gE-mOc" secondAttribute="trailing" id="8Gq-Ug-uWs"/>
-                            <constraint firstAttribute="bottom" secondItem="MLI-gE-mOc" secondAttribute="bottom" id="AKc-jj-B37"/>
-                            <constraint firstItem="MLI-gE-mOc" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="FQ4-2r-Hf1"/>
-                            <constraint firstItem="MLI-gE-mOc" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="vbV-xQ-RxZ"/>
+                            <constraint firstItem="MLI-gE-mOc" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="6qb-IK-fUb"/>
+                            <constraint firstAttribute="bottom" secondItem="MLI-gE-mOc" secondAttribute="bottom" id="AZk-p8-asn"/>
+                            <constraint firstAttribute="trailing" secondItem="MLI-gE-mOc" secondAttribute="trailing" id="Wr0-4f-FMt"/>
+                            <constraint firstItem="MLI-gE-mOc" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Zi3-Om-i4h"/>
                         </constraints>
                     </view>
                     <connections>
