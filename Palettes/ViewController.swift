@@ -12,6 +12,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
     // MARK: Constants
     
+    let DefaultNumResults = 20
     let RowHeight = 110
     let PaletteViewCornerRadius = 5
     let CopiedViewAnimationSpringBounciness = 20
@@ -24,18 +25,24 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let CopiedViewTextSize = 12
     let CopiedViewTextColor = "#ECF0F1"
     let PaletteCellIdentifier = "PaletteCell"
-    let PalettesEndpoint = "http://www.colourlovers.com/api/palettes?format=json"
-    let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top?format=json"
+    let PalettesEndpoint = "http://www.colourlovers.com/api/palettes"
+    let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top"
     
     // MARK: Properties
     
     var manager = AFHTTPRequestOperationManager()
-    var palettes = [Palette]()
     var showingTopPalettes = true
+    var scrolledToBottom = false
+    var noResults = false
+    var lastEndpoint = ""
+    var lastParams = [String:String]()
+    var resultsPage = 0
+    var palettes = [Palette]()
     var copiedView = NSView()
     var copiedViewAnimation = POPSpringAnimation()
     var copiedViewReverseAnimation = POPSpringAnimation()
     @IBOutlet weak var tableView: MainTableView!
+    @IBOutlet weak var scrollView: NSScrollView!
     
     // MARK: Structs
     
@@ -51,8 +58,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         super.viewDidLoad()
         var window = NSApplication.sharedApplication().windows[0] as NSWindow
         window.delegate = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll:", name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
         setupCopiedView()
         getPalettes(endpoint: TopPalettesEndpoint, params: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: NSTableViewDataSource
@@ -104,6 +116,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: IBActions
     
     @IBAction func searchFieldChanged(searchField: NSSearchField!) {
+        resultsPage = 0
         if searchField.stringValue == "" {
             if !showingTopPalettes {
                 getPalettes(endpoint: TopPalettesEndpoint, params: nil)
@@ -154,24 +167,70 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func getPalettes(#endpoint: String, params: [String:String]?) {
+        // Add default keys to params
+        var params = params
+        if params == nil {
+            params = [String:String]()
+        }
+        params?.updateValue("json", forKey: "format")
+        params?.updateValue(String(DefaultNumResults), forKey: "numResults")
+        
+        // No request if endpoint ans params are unchanged
+        if endpoint == lastEndpoint && params! == lastParams {
+            return
+        }
+        
+        // Make the request
         manager.GET(endpoint, parameters: params, success: { operation, responseObject in
+            // Save the latest endpoint and params
+            self.lastEndpoint = "\(operation.request.URL.scheme!)://\(operation.request.URL.host!)\(operation.request.URL.path!)"
+            self.lastParams = params!
+            
+            // Parse the response object
             if let jsonArray = responseObject as? [NSDictionary] {
-                self.palettes.removeAll()
+                // Remove all palettes if this is a new query
+                if params?.indexForKey("resultOffset") == nil {
+                    self.palettes.removeAll()
+                }
+                
+                // Keep track of whether any results were returned
+                self.noResults = jsonArray.count == 0
+                
+                // Parse JSON for each palette and add to palettes array
                 for paletteInfo in jsonArray {
                     let url = paletteInfo.objectForKey("url") as? String
                     let colors = paletteInfo.objectForKey("colors") as? [String]
                     let title = paletteInfo.objectForKey("title") as? String
                     self.palettes.append(Palette(url: url!, colors: colors!, title: title!))
                 }
+                
+                // Reload table in main queue and scroll to top if this is a new query
                 dispatch_async(dispatch_get_main_queue(), {
+                    if params?.indexForKey("resultOffset") == nil {
+                        self.tableView.scrollRowToVisible(0, animate: false)
+                    } else {
+                        self.scrolledToBottom = false
+                    }
                     self.tableView.reloadData()
-                    self.tableView.scrollRowToVisible(0, animate: true)
                 })
             } else {
                 println("Could not load JSON...")
             }
         }) { _, _ in
             println("Could not load JSON...")
+        }
+    }
+    
+    func scrollViewDidScroll(notification: NSNotification) {
+        let currentPosition = CGRectGetMaxY(scrollView.contentView.visibleRect)
+        let contentHeight = tableView.bounds.size.height - 5;
+
+        if !noResults && !scrolledToBottom && currentPosition > contentHeight - 2 {
+            scrolledToBottom = true
+            resultsPage++
+            var params = lastParams
+            params.updateValue(String(DefaultNumResults * resultsPage), forKey: "resultOffset")
+            getPalettes(endpoint: lastEndpoint, params: params)
         }
     }
 
