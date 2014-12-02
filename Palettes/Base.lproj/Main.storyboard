@@ -774,6 +774,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="scrollView" destination="MLI-gE-mOc" id="Kjq-yk-zVd"/>
                         <outlet property="tableView" destination="PLA-IL-pFt" id="dmC-NE-pKj"/>
                     </connections>
                 </viewController>
