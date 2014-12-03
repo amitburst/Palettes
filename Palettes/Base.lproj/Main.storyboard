@@ -729,7 +729,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYL-XK-3hM">
-                                                                    <rect key="frame" x="13" y="11" width="224" height="17"/>
+                                                                    <rect key="frame" x="13" y="11" width="171" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" sendsActionOnEndEditing="YES" title="Table View Cell" id="fRp-jm-gwH">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -739,8 +739,19 @@
                                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-nZ-Q5l">
                                                                     <rect key="frame" x="15" y="36" width="220" height="60"/>
                                                                 </customView>
+                                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSe-fC-rws">
+                                                                    <rect key="frame" x="185" y="4" width="55" height="28"/>
+                                                                    <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PgY-cj-y1I">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="clickedOpenButton:" target="bPe-FY-55M" id="aIq-qi-ZXU"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <connections>
+                                                                <outlet property="openButton" destination="uSe-fC-rws" id="aOy-pK-HOq"/>
                                                                 <outlet property="paletteView" destination="lmt-nZ-Q5l" id="Y8V-6D-B4c"/>
                                                                 <outlet property="textField" destination="RYL-XK-3hM" id="C1p-6n-76T"/>
                                                             </connections>
@@ -780,7 +791,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73" y="702"/>
+            <point key="canvasLocation" x="73" y="701.5"/>
         </scene>
     </scenes>
 </document>

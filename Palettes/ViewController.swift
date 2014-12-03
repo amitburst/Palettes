@@ -97,11 +97,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         // Create and get references to other important items
         let cell = tableView.makeViewWithIdentifier(PaletteCellIdentifier, owner: self) as PaletteTableCellView
         let paletteView = cell.paletteView
+        let openButton = cell.openButton
         let palette = palettes[row]
         
         // Set cell properties
         cell.textField?.stringValue = palette.title
         cell.colors = palette.colors
+        cell.url = palette.url
+        cell.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .InVisibleRect | .MouseEnteredAndExited, owner: cell, userInfo: nil))
+        
+        // Set cell's open button properties
+        cell.openButton.wantsLayer = true
+        cell.openButton.layer?.opacity = 0
         
         // Set cell's palette view properties
         paletteView.wantsLayer = true
