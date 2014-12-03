@@ -38,4 +38,8 @@ class PaletteTableCellView: NSTableCellView {
         })
     }
     
+    override func cursorUpdate(event: NSEvent) {
+        NSCursor.pointingHandCursor().set()
+    }
+    
 }
