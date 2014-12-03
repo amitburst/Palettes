@@ -268,5 +268,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             getPalettes(endpoint: lastEndpoint, params: params)
         }
     }
+    
+    func scrollViewDidScroll(notification: NSNotification) {
+        let currentPosition = CGRectGetMaxY(scrollView.contentView.visibleRect)
+        let contentHeight = tableView.bounds.size.height - 5;
+
+        if !noResults && !scrolledToBottom && currentPosition > contentHeight - 2 {
+            scrolledToBottom = true
+            resultsPage++
+            var params = lastParams
+            params.updateValue(String(DefaultNumResults * resultsPage), forKey: "resultOffset")
+            getPalettes(endpoint: lastEndpoint, params: params)
+        }
+    }
 
 }
