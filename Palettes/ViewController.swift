@@ -46,6 +46,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var copiedView = NSView()
     var copiedViewAnimation = POPSpringAnimation()
     var copiedViewReverseAnimation = POPSpringAnimation()
+    var fadeAnimation = POPBasicAnimation()
+    var fadeReverseAnimation = POPBasicAnimation()
     var tableText = NSTextField()
     @IBOutlet weak var tableView: MainTableView!
     @IBOutlet weak var scrollView: NSScrollView!
@@ -67,6 +69,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll:", name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
         setupCopiedView()
         setupTableText()
+        setupAnimations()
         getPalettes(endpoint: TopPalettesEndpoint, params: nil)
     }
     
@@ -159,7 +162,21 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         copiedView.wantsLayer = true
         copiedView.layer?.backgroundColor = NSColor(rgba: CopiedViewBackgroundColor).CGColor
         view.addSubview(copiedView)
-        
+    }
+    
+    func setupTableText() {
+        // Set up table text
+        tableText = NSTextField(frame: CGRectMake(0, view.bounds.height / 2 - CGFloat(TableTextHeight) / 4, view.bounds.width, CGFloat(TableTextHeight)))
+        tableText.bezeled = false
+        tableText.drawsBackground = false
+        tableText.editable = false
+        tableText.selectable = false
+        tableText.alignment = .CenterTextAlignment
+        tableText.textColor = NSColor(rgba: TableTextColor)
+        tableText.font = NSFont.boldSystemFontOfSize(CGFloat(TableTextSize))
+    }
+    
+    func setupAnimations() {
         // Set up copied view animation
         copiedViewAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
         copiedViewAnimation.toValue = CopiedViewAnimationToValue
@@ -171,17 +188,16 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         copiedViewReverseAnimation.toValue = CopiedViewReverseAnimationToValue
         copiedViewReverseAnimation.springBounciness = CGFloat(CopiedViewAnimationSpringBounciness)
         copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
-    }
-    
-    func setupTableText() {
-        tableText = NSTextField(frame: CGRectMake(0, view.bounds.height / 2 - CGFloat(TableTextHeight) / 4, view.bounds.width, CGFloat(TableTextHeight)))
-        tableText.bezeled = false
-        tableText.drawsBackground = false
-        tableText.editable = false
-        tableText.selectable = false
-        tableText.alignment = .CenterTextAlignment
-        tableText.textColor = NSColor(rgba: TableTextColor)
-        tableText.font = NSFont.boldSystemFontOfSize(CGFloat(TableTextSize))
+        
+        // Set up fade animation
+        fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeAnimation.fromValue = 0
+        fadeAnimation.toValue = 1
+        
+        // Set up fade reverse animation
+        fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeReverseAnimation.fromValue = 1
+        fadeReverseAnimation.toValue = 0
     }
     
     func getPalettes(#endpoint: String, params: [String:String]?) {
@@ -217,8 +233,15 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 if self.noResults {
                     self.tableText.stringValue = self.TableTextNoResults
                     self.view.addSubview(self.tableText)
+                    self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                        self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
+                    })
+                    return
                 } else {
                     self.tableText.removeFromSuperview()
+                    self.tableText.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
                 }
                 
                 // Parse JSON for each palette and add to palettes array
@@ -233,6 +256,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 dispatch_async(dispatch_get_main_queue(), {
                     if params?.indexForKey("resultOffset") == nil {
                         self.tableView.scrollRowToVisible(0)
+                        self.tableView.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
                     } else {
                         self.scrolledToBottom = false
                     }
@@ -242,16 +266,20 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 self.palettes.removeAll()
                 self.tableText.stringValue = self.TableTextError
                 self.view.addSubview(self.tableText)
+                self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
+                    self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
                 })
             }
         }) { _, _ in
             self.palettes.removeAll()
             self.tableText.stringValue = self.TableTextError
             self.view.addSubview(self.tableText)
+            self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
+                self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
             })
         }
     }
