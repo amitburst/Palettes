@@ -24,6 +24,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let CopiedViewText = "Copied!"
     let CopiedViewTextSize = 12
     let CopiedViewTextColor = "#ECF0F1"
+    let TableTextHeight = 40
+    let TableTextSize = 16
+    let TableTextColor = "#bdc3c7"
+    let TableTextNoResults = "No Results Found"
+    let TableTextError = "Error Loading Palettes :("
     let PaletteCellIdentifier = "PaletteCell"
     let PalettesEndpoint = "http://www.colourlovers.com/api/palettes"
     let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top"
@@ -41,6 +46,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var copiedView = NSView()
     var copiedViewAnimation = POPSpringAnimation()
     var copiedViewReverseAnimation = POPSpringAnimation()
+    var tableText = NSTextField()
     @IBOutlet weak var tableView: MainTableView!
     @IBOutlet weak var scrollView: NSScrollView!
     
@@ -60,6 +66,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         window.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll:", name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
         setupCopiedView()
+        setupTableText()
         getPalettes(endpoint: TopPalettesEndpoint, params: nil)
     }
     
@@ -166,6 +173,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
     }
     
+    func setupTableText() {
+        tableText = NSTextField(frame: CGRectMake(0, view.bounds.height / 2 - CGFloat(TableTextHeight) / 4, view.bounds.width, CGFloat(TableTextHeight)))
+        tableText.bezeled = false
+        tableText.drawsBackground = false
+        tableText.editable = false
+        tableText.selectable = false
+        tableText.alignment = .CenterTextAlignment
+        tableText.textColor = NSColor(rgba: TableTextColor)
+        tableText.font = NSFont.boldSystemFontOfSize(CGFloat(TableTextSize))
+    }
+    
     func getPalettes(#endpoint: String, params: [String:String]?) {
         // Add default keys to params
         var params = params
@@ -194,7 +212,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 }
                 
                 // Keep track of whether any results were returned
+                // Show and hide table text accordingly
                 self.noResults = jsonArray.count == 0
+                if self.noResults {
+                    self.tableText.stringValue = self.TableTextNoResults
+                    self.view.addSubview(self.tableText)
+                } else {
+                    self.tableText.removeFromSuperview()
+                }
                 
                 // Parse JSON for each palette and add to palettes array
                 for paletteInfo in jsonArray {
@@ -214,10 +239,20 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                     self.tableView.reloadData()
                 })
             } else {
-                println("Could not load JSON...")
+                self.palettes.removeAll()
+                self.tableText.stringValue = self.TableTextError
+                self.view.addSubview(self.tableText)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                })
             }
         }) { _, _ in
-            println("Could not load JSON...")
+            self.palettes.removeAll()
+            self.tableText.stringValue = self.TableTextError
+            self.view.addSubview(self.tableText)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
     }
     
