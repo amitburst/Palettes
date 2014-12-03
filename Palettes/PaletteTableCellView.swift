@@ -17,11 +17,11 @@ class PaletteTableCellView: NSTableCellView {
     
     // MARK: NSResponder
     
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(event: NSEvent) {
         // Get index of selected color
         let colorWidth = ceil(paletteView.bounds.width / CGFloat(paletteView.subviews.count))
         let colorStartX = paletteView.frame.origin.x
-        let colorIndex = Int(floor((theEvent.locationInWindow.x - colorStartX) / colorWidth))
+        let colorIndex = Int(floor((event.locationInWindow.x - colorStartX) / colorWidth))
         
         // Copy color to clipboard
         let pasteboard = NSPasteboard.generalPasteboard()
@@ -39,7 +39,9 @@ class PaletteTableCellView: NSTableCellView {
     }
     
     override func cursorUpdate(event: NSEvent) {
-        NSCursor.pointingHandCursor().set()
+        if paletteView.convertPoint(event.locationInWindow, fromView: nil).y > 0 {
+            NSCursor.pointingHandCursor().set()
+        }
     }
     
 }

@@ -107,7 +107,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         paletteView.wantsLayer = true
         paletteView.layer?.cornerRadius = CGFloat(PaletteViewCornerRadius)
         paletteView.subviews = []
-        paletteView.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveAlways | .InVisibleRect | .EnabledDuringMouseDrag | .AssumeInside | .CursorUpdate, owner: cell, userInfo: nil))
+        paletteView.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveAlways | .InVisibleRect | .CursorUpdate, owner: cell, userInfo: nil))
         
         // Calculate width and height of each color view
         let colorViewWidth = ceil(paletteView.bounds.width / CGFloat(cell.colors.count))
