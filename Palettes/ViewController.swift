@@ -8,6 +8,20 @@
 
 import Cocoa
 
+extension String {
+    subscript(integerIndex: Int) -> Character {
+        let index = advance(startIndex, integerIndex)
+        return self[index]
+    }
+    
+    subscript(integerRange: Range<Int>) -> String {
+        let start = advance(startIndex, integerRange.startIndex)
+        let end = advance(startIndex, integerRange.endIndex)
+        let range = start..<end
+        return self[range]
+    }
+}
+
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate {
 
     // MARK: Constants
@@ -156,8 +170,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 showingTopPalettes = true
             }
         } else {
-            if let match = searchField.stringValue.rangeOfString("^[0-9a-fA-F]{6}$", options: .RegularExpressionSearch) {
-                getPalettes(endpoint: PalettesEndpoint, params: ["hex": searchField.stringValue])
+            if let match = searchField.stringValue.rangeOfString("^#?[0-9a-fA-F]{6}$", options: .RegularExpressionSearch) {
+                var query = searchField.stringValue
+                if query.hasPrefix("#") {
+                    query = query[1...6]
+                }
+                getPalettes(endpoint: PalettesEndpoint, params: ["hex": query])
             } else {
                 getPalettes(endpoint: PalettesEndpoint, params: ["keywords": searchField.stringValue])
             }
