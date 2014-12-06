@@ -16,6 +16,7 @@
 		D765EC1B1A2AF16000469783 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D765EC1A1A2AF16000469783 /* MainTableView.swift */; };
 		D7AFD93A1A27092A00FC9000 /* PaletteTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */; };
 		D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */; };
+		D7B040C61A32FF0D006BDF38 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D7B040C51A32FF0D006BDF38 /* Credits.rtf */; };
 		D7E3EE1E1A2FCEF900DC1AC9 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E3EE1D1A2FCEF900DC1AC9 /* ColorConverter.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		D765EC1A1A2AF16000469783 /* MainTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCellView.swift; sourceTree = "<group>"; };
 		D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorExtension.swift; sourceTree = "<group>"; };
+		D7B040C51A32FF0D006BDF38 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		D7E3EE1D1A2FCEF900DC1AC9 /* ColorConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 		D719E9261A26D49E00E6CF1F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D7B040C51A32FF0D006BDF38 /* Credits.rtf */,
 				D708CB031A26DAAA00266C98 /* Palettes-Bridging-Header.h */,
 				D719E9271A26D49E00E6CF1F /* Info.plist */,
 			);
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D719E92D1A26D49E00E6CF1F /* Images.xcassets in Resources */,
+				D7B040C61A32FF0D006BDF38 /* Credits.rtf in Resources */,
 				D719E9301A26D49E00E6CF1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
