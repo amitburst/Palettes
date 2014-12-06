@@ -30,12 +30,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let TableTextNoResults = "No Results Found"
     let TableTextError = "Error Loading Palettes :("
     let PaletteCellIdentifier = "PaletteCell"
+    let CopyTypeKey = "CopyType"
     let PalettesEndpoint = "http://www.colourlovers.com/api/palettes"
     let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top"
     
     // MARK: Properties
     
     var manager = AFHTTPRequestOperationManager()
+    var preferences = NSUserDefaults.standardUserDefaults()
     var showingTopPalettes = true
     var scrolledToBottom = false
     var noResults = false
@@ -65,13 +67,25 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var window = NSApplication.sharedApplication().windows[0] as NSWindow
+        
+        let window = NSApplication.sharedApplication().windows[0] as NSWindow
         window.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll:", name: NSViewBoundsDidChangeNotification, object: scrollView.contentView)
+        
         setupCopiedView()
         setupTableText()
         setupAnimations()
         getPalettes(endpoint: TopPalettesEndpoint, params: nil)
+    }
+    
+    override func viewDidAppear() {
+        if let lastCopyType = preferences.valueForKey(CopyTypeKey) as? Int {
+            copyType = lastCopyType
+            let window = NSApplication.sharedApplication().windows[0] as NSWindow
+            window.delegate = self
+            let popUpButton = window.toolbar?.items[1].view? as NSPopUpButton
+            popUpButton.selectItemAtIndex(copyType)
+        }
     }
     
     deinit {
@@ -153,6 +167,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     @IBAction func copyTypeChanged(button: NSPopUpButton!) {
         copyType = button.indexOfSelectedItem
+        preferences.setInteger(copyType, forKey: CopyTypeKey)
+        preferences.synchronize()
     }
     
     // MARK: Functions
