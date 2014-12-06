@@ -43,6 +43,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var lastParams = [String:String]()
     var resultsPage = 0
     var palettes = [Palette]()
+    var copyType = 0
     var copiedView = NSView()
     var copiedViewAnimation = POPSpringAnimation()
     var copiedViewReverseAnimation = POPSpringAnimation()
@@ -148,6 +149,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
             showingTopPalettes = false
         }
+    }
+    
+    @IBAction func copyTypeChanged(button: NSPopUpButton!) {
+        println(button.indexOfSelectedItem)
+        copyType = button.indexOfSelectedItem
     }
     
     // MARK: Functions

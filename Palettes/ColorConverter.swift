@@ -1,0 +1,98 @@
+//
+//  ColorConverter.swift
+//  Palettes
+//
+//  Created by Amit Burstein on 12/3/14.
+//  Copyright (c) 2014 Amit Burstein. All rights reserved.
+//
+
+import Cocoa
+
+class ColorConverter: NSObject {
+    
+    // MARK: Enumerations
+    
+    enum CopyType: Int {
+        case HEX = 0, RGB = 1, RGBA = 2, HSL = 3, HSLA = 4, NSColorSwift = 5, NSColorObjC = 6, UIColorSwift = 7, UIColorObjC = 8
+    }
+    
+    // MARK: Functions
+    
+    class func getColorString(#index: Int, rawHex: String) -> String {
+        let hex = "0x\(rawHex)".withCString { strtoul($0, nil, 16) }
+        var red = (hex & 0xFF0000) >> 16
+        var green = (hex & 0x00FF00) >> 8
+        var blue = (hex & 0x0000FF)
+        
+        switch index {
+        case CopyType.HEX.rawValue:
+            return "#\(rawHex.lowercaseString)"
+        case CopyType.RGB.rawValue:
+            return "rgb(\(red), \(green), \(blue))"
+        case CopyType.RGBA.rawValue:
+            return "rgba(\(red), \(green), \(blue), 1)"
+        case CopyType.HSL.rawValue:
+            let (h, s, l) = getHSLFromRGB(red: red, green: green, blue: blue)
+            return "hsl(\(h), \(s)%, \(l)%)"
+        case CopyType.HSLA.rawValue:
+            let (h, s, l) = getHSLFromRGB(red: red, green: green, blue: blue)
+            return "hsla(\(h), \(s)%, \(l)%, 1)"
+        case CopyType.NSColorSwift.rawValue:
+            let r = String(format: "%.3f", Float(red) / 255)
+            let g = String(format: "%.3f", Float(green) / 255)
+            let b = String(format: "%.3f", Float(blue) / 255)
+            return "NSColor(red: \(r), green: \(g), blue: \(b), alpha: 1)"
+        case CopyType.NSColorObjC.rawValue:
+            let r = String(format: "%.3f", Float(red) / 255)
+            let g = String(format: "%.3f", Float(green) / 255)
+            let b = String(format: "%.3f", Float(blue) / 255)
+            return "[NSColor colorWithRed:\(r) green:\(g) blue:\(b) alpha:1]"
+        case CopyType.UIColorSwift.rawValue:
+            let r = String(format: "%.3f", Float(red) / 255)
+            let g = String(format: "%.3f", Float(green) / 255)
+            let b = String(format: "%.3f", Float(blue) / 255)
+            return "UIColor(red: \(r), green: \(g), blue: \(b), alpha: 1)"
+        case CopyType.UIColorObjC.rawValue:
+            let r = String(format: "%.3f", Float(red) / 255)
+            let g = String(format: "%.3f", Float(green) / 255)
+            let b = String(format: "%.3f", Float(blue) / 255)
+            return "[UIColor colorWithRed:\(r) green:\(g) blue:\(b) alpha:1]"
+        default:
+            println("New color type added?")
+            return ""
+        }
+    }
+    
+    class func getHSLFromRGB(#red: UInt, green: UInt, blue: UInt) -> (h: Int, s: Int, l: Int) {
+        var r = CGFloat(red) / 255
+        var g = CGFloat(green) / 255
+        var b = CGFloat(blue) / 255
+        let maxRGB = max(r, g, b)
+        let minRGB = min(r, g, b)
+        var h = (maxRGB + minRGB) / 2
+        var s = h
+        var l = h
+        
+        if minRGB == maxRGB {
+            h = 0
+            s = 0
+        } else {
+            let d = maxRGB - minRGB
+            s = l > 0.5 ? d / (2 - maxRGB - minRGB) : d / (maxRGB + minRGB)
+            switch maxRGB {
+            case r:
+                h = (g - b) / d + (g < b ? 6 : 0)
+            case g:
+                h = (b - r) / d + 2
+            case b:
+                h = (r - g) / d + 4
+            default:
+                println("Something bad happened...")
+            }
+            h /= 6
+        }
+        
+        return (Int(round(h * 360)), Int(round(s * 100)), Int(round(l * 100)))
+    }
+    
+}

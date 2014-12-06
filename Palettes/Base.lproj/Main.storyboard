@@ -674,11 +674,39 @@
                                         <action selector="searchFieldChanged:" target="Oky-zY-oP4" id="AOy-jR-Hus"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1CC65E64-2931-4C9D-AE9B-C6FC117A75A2" label="Custom View" paletteLabel="Custom View" id="xEX-MV-LOu">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="50" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="PZm-qo-CsQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="HEX" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="tye-Jv-6uX" id="l34-nj-cef">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="l7q-Rd-kpv">
+                                                <items>
+                                                    <menuItem title="HEX" state="on" id="tye-Jv-6uX"/>
+                                                    <menuItem title="RGB" id="0YU-IG-029"/>
+                                                    <menuItem title="RGBA" id="mge-Qa-8n3"/>
+                                                    <menuItem title="HSL" id="U1U-sA-xDa"/>
+                                                    <menuItem title="HSLA" id="GHj-UY-AJE"/>
+                                                    <menuItem title="NSColor (Swift)" id="rBo-WZ-ImW"/>
+                                                    <menuItem title="NSColor (Obj-C)" id="aSk-y4-6e8"/>
+                                                    <menuItem title="UIColor (Swift)" id="YWP-vE-KYl"/>
+                                                    <menuItem title="UIColor (Obj-C)" id="Kxk-bA-oWS"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="copyTypeChanged:" target="Oky-zY-oP4" id="h8a-u0-ZqO"/>
+                                        </connections>
+                                    </popUpButton>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="bfx-19-zJr"/>
                                 <toolbarItem reference="7ZZ-rw-FMC"/>
-                                <toolbarItem reference="bfx-19-zJr"/>
+                                <toolbarItem reference="xEX-MV-LOu"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>

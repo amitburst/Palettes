@@ -16,6 +16,7 @@
 		D765EC1B1A2AF16000469783 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D765EC1A1A2AF16000469783 /* MainTableView.swift */; };
 		D7AFD93A1A27092A00FC9000 /* PaletteTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */; };
 		D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */; };
+		D7E3EE1E1A2FCEF900DC1AC9 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E3EE1D1A2FCEF900DC1AC9 /* ColorConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		D765EC1A1A2AF16000469783 /* MainTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCellView.swift; sourceTree = "<group>"; };
 		D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorExtension.swift; sourceTree = "<group>"; };
+		D7E3EE1D1A2FCEF900DC1AC9 /* ColorConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				D7AFD9391A27092A00FC9000 /* PaletteTableCellView.swift */,
 				D765EC1A1A2AF16000469783 /* MainTableView.swift */,
 				D7AFD93B1A270C8D00FC9000 /* NSColorExtension.swift */,
+				D7E3EE1D1A2FCEF900DC1AC9 /* ColorConverter.swift */,
 				D719E92E1A26D49E00E6CF1F /* Main.storyboard */,
 				D719E92C1A26D49E00E6CF1F /* Images.xcassets */,
 				D719E9261A26D49E00E6CF1F /* Supporting Files */,
@@ -282,6 +285,7 @@
 				D719E92B1A26D49E00E6CF1F /* ViewController.swift in Sources */,
 				D765EC1B1A2AF16000469783 /* MainTableView.swift in Sources */,
 				D7AFD93C1A270C8D00FC9000 /* NSColorExtension.swift in Sources */,
+				D7E3EE1E1A2FCEF900DC1AC9 /* ColorConverter.swift in Sources */,
 				D719E9291A26D49E00E6CF1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

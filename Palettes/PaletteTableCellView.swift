@@ -50,12 +50,12 @@ class PaletteTableCellView: NSTableCellView {
         let colorIndex = Int(floor((event.locationInWindow.x - colorStartX) / colorWidth))
         
         // Copy color to clipboard
+        let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as ViewController
         let pasteboard = NSPasteboard.generalPasteboard()
         pasteboard.clearContents()
-        pasteboard.writeObjects([colors[colorIndex]])
+        pasteboard.writeObjects([ColorConverter.getColorString(index: viewController.copyType, rawHex: colors[colorIndex])])
         
         // Show copy view
-        let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as ViewController
         viewController.copiedView.layer?.pop_addAnimation(viewController.copiedViewAnimation, forKey: nil)
 
         // Hide copy view after 2 seconds
