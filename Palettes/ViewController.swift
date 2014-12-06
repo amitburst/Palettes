@@ -152,7 +152,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     @IBAction func copyTypeChanged(button: NSPopUpButton!) {
-        println(button.indexOfSelectedItem)
         copyType = button.indexOfSelectedItem
     }
     
