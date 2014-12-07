@@ -43,6 +43,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let TableTextColor = "#bdc3c7"
     let TableTextNoResults = "No Results Found"
     let TableTextError = "Error Loading Palettes :("
+    let PaletteViewBorderColor = NSColor.gridColor().CGColor
+    let PaletteViewBorderWidth = 0.2
     let PaletteCellIdentifier = "PaletteCell"
     let CopyTypeKey = "CopyType"
     let PalettesEndpoint = "http://www.colourlovers.com/api/palettes"
@@ -142,6 +144,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         // Set cell's palette view properties
         paletteView.wantsLayer = true
         paletteView.layer?.cornerRadius = CGFloat(PaletteViewCornerRadius)
+        paletteView.layer?.borderColor = PaletteViewBorderColor
+        paletteView.layer?.borderWidth = CGFloat(PaletteViewBorderWidth)
         paletteView.subviews = []
         paletteView.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveAlways | .InVisibleRect | .CursorUpdate, owner: cell, userInfo: nil))
         
