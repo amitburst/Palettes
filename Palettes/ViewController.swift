@@ -278,13 +278,15 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 // Show and hide table text accordingly
                 self.noResults = jsonArray.count == 0
                 if self.noResults {
-                    self.tableText.stringValue = self.TableTextNoResults
-                    self.view.addSubview(self.tableText)
-                    self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.reloadData()
-                        self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
-                    })
+                    if params?.indexForKey("resultOffset") == nil {
+                        self.tableText.stringValue = self.TableTextNoResults
+                        self.view.addSubview(self.tableText)
+                        self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.tableView.reloadData()
+                            self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
+                        })
+                    }
                     return
                 } else {
                     self.tableText.removeFromSuperview()
