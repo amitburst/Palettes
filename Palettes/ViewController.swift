@@ -31,6 +31,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let PaletteViewCornerRadius = 5
     let CopiedViewAnimationSpringBounciness = 20
     let CopiedViewAnimationSpringSpeed = 15
+    let CopiedViewReverseAnimationSpringBounciness = 10
+    let CopiedViewReverseAnimationSpringSpeed = 15
     let CopiedViewAnimationToValue = -20
     let CopiedViewReverseAnimationToValue = -40
     let CopiedViewHeight = 40
@@ -237,8 +239,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         // Set up copied view reverse animation
         copiedViewReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
         copiedViewReverseAnimation.toValue = CopiedViewReverseAnimationToValue
-        copiedViewReverseAnimation.springBounciness = CGFloat(CopiedViewAnimationSpringBounciness)
-        copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
+        copiedViewReverseAnimation.springBounciness = CGFloat(CopiedViewReverseAnimationSpringBounciness)
+        copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewReverseAnimationSpringSpeed)
         
         // Set up fade animation
         fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
