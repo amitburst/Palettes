@@ -36,7 +36,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let CopiedViewAnimationToValue = -20
     let CopiedViewReverseAnimationToValue = -40
     let CopiedViewHeight = 40
-    let CopiedViewBackgroundColor = "#67809FE6"
+    let CopiedViewBackgroundColor = "#67809FF5"
     let CopiedViewText = "Copied!"
     let CopiedViewTextSize = 12
     let CopiedViewTextColor = "#ECF0F1"
