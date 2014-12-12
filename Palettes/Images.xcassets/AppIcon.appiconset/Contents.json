@@ -43,13 +43,13 @@
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Icon.png",
+      "filename" : "TIlted Rect.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "Icon@2x.png",
+      "filename" : "TIlted Rect@2x.png",
       "scale" : "2x"
     }
   ],
