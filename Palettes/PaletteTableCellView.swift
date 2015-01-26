@@ -10,31 +10,36 @@ import Cocoa
 
 class PaletteTableCellView: NSTableCellView {
     
-    // MARK: Constants
-    
-    let FadeAnimationDuration = 0.2
-    
     // MARK: Properties
     
-    var fadeAnimation = POPBasicAnimation()
-    var fadeReverseAnimation = POPBasicAnimation()
-    var colors = [String]()
-    var url = ""
+    let FadeAnimationDuration = 0.2
+    let CopyViewAnimationDuration = Int64(2 * Double(NSEC_PER_SEC))
+    
+    var fadeAnimation: POPBasicAnimation!
+    var fadeReverseAnimation: POPBasicAnimation!
+    var colors: [String]!
+    var url: String!
+    
     @IBOutlet weak var paletteView: NSView!
     @IBOutlet weak var openButton: NSButton!
     
-    // MARK: NSCoding
+    // MARK: Initialization
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        colors = []
+        url = nil
+        
         // Set up fade animation
+        fadeAnimation = POPBasicAnimation()
         fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
         fadeAnimation.fromValue = 0
         fadeAnimation.toValue = 1
         fadeAnimation.duration = FadeAnimationDuration
         
         // Set up fade reverse animation
+        fadeReverseAnimation = POPBasicAnimation()
         fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
         fadeReverseAnimation.fromValue = 1
         fadeReverseAnimation.toValue = 0
@@ -59,7 +64,7 @@ class PaletteTableCellView: NSTableCellView {
         viewController.copiedView.layer?.pop_addAnimation(viewController.copiedViewAnimation, forKey: nil)
 
         // Hide copy view after 2 seconds
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, CopyViewAnimationDuration), dispatch_get_main_queue(), {
             viewController.copiedView.layer!.pop_addAnimation(viewController.copiedViewReverseAnimation, forKey: nil)
         })
     }

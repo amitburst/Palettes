@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Amit Burstein. All rights reserved.
 //
 
-import Cocoa
-
 class ColorConverter: NSObject {
     
     // MARK: Enumerations

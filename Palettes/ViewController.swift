@@ -8,23 +8,9 @@
 
 import Cocoa
 
-extension String {
-    subscript(integerIndex: Int) -> Character {
-        let index = advance(startIndex, integerIndex)
-        return self[index]
-    }
-    
-    subscript(integerRange: Range<Int>) -> String {
-        let start = advance(startIndex, integerRange.startIndex)
-        let end = advance(startIndex, integerRange.endIndex)
-        let range = start..<end
-        return self[range]
-    }
-}
-
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate {
 
-    // MARK: Constants
+    // MARK: Properties
     
     let DefaultNumResults = 20
     let RowHeight = 110
@@ -52,24 +38,23 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let PalettesEndpoint = "http://www.colourlovers.com/api/palettes"
     let TopPalettesEndpoint = "http://www.colourlovers.com/api/palettes/top"
     
-    // MARK: Properties
-    
-    var manager = AFHTTPRequestOperationManager()
-    var preferences = NSUserDefaults.standardUserDefaults()
-    var showingTopPalettes = true
-    var scrolledToBottom = false
-    var noResults = false
-    var lastEndpoint = ""
-    var lastParams = [String:String]()
-    var resultsPage = 0
-    var palettes = [Palette]()
-    var copyType = 0
-    var copiedView = NSView()
-    var copiedViewAnimation = POPSpringAnimation()
-    var copiedViewReverseAnimation = POPSpringAnimation()
-    var fadeAnimation = POPBasicAnimation()
-    var fadeReverseAnimation = POPBasicAnimation()
-    var tableText = NSTextField()
+    var manager: AFHTTPRequestOperationManager!
+    var preferences: NSUserDefaults!
+    var showingTopPalettes: Bool!
+    var scrolledToBottom: Bool!
+    var noResults: Bool!
+    var lastEndpoint: String!
+    var lastParams: [String:String]!
+    var resultsPage: Int!
+    var palettes: [Palette]!
+    var copyType: Int!
+    var copiedView: NSView!
+    var copiedViewAnimation: POPSpringAnimation!
+    var copiedViewReverseAnimation: POPSpringAnimation!
+    var fadeAnimation: POPBasicAnimation!
+    var fadeReverseAnimation: POPBasicAnimation!
+    var tableText: NSTextField!
+
     @IBOutlet weak var tableView: MainTableView!
     @IBOutlet weak var scrollView: NSScrollView!
     
@@ -79,6 +64,28 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         var url: String
         var colors: [String]
         var title: String
+    }
+    
+    // MARK: Initialization
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        manager = AFHTTPRequestOperationManager()
+        preferences = NSUserDefaults.standardUserDefaults()
+        showingTopPalettes = true
+        scrolledToBottom = false
+        noResults = false
+        lastEndpoint = ""
+        lastParams = [String:String]()
+        resultsPage = 0
+        palettes = []
+        copyType = 0
+        copiedView = NSView()
+        copiedViewAnimation = POPSpringAnimation()
+        copiedViewReverseAnimation = POPSpringAnimation()
+        fadeAnimation = POPBasicAnimation()
+        fadeReverseAnimation = POPBasicAnimation()
+        tableText = NSTextField()
     }
     
     // MARK: NSViewController
@@ -283,15 +290,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 // Keep track of whether any results were returned
                 // Show and hide table text accordingly
                 self.noResults = jsonArray.count == 0
-                if self.noResults {
+                if self.noResults! {
                     if params?.indexForKey("resultOffset") == nil {
-                        self.tableText.stringValue = self.TableTextNoResults
-                        self.view.addSubview(self.tableText)
-                        self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.tableView.reloadData()
-                            self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
-                        })
+                        self.showErrorMessage(self.TableTextNoResults)
                     }
                     return
                 } else {
@@ -318,25 +319,22 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                     self.tableView.reloadData()
                 })
             } else {
-                self.palettes.removeAll()
-                self.tableText.stringValue = self.TableTextError
-                self.view.addSubview(self.tableText)
-                self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                    self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
-                })
+                self.showErrorMessage(self.TableTextError)
             }
         }) { _, _ in
-            self.palettes.removeAll()
-            self.tableText.stringValue = self.TableTextError
-            self.view.addSubview(self.tableText)
-            self.tableText.layer?.pop_addAnimation(self.fadeAnimation, forKey: nil)
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-                self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
-            })
+            self.showErrorMessage(self.TableTextError)
         }
+    }
+    
+    func showErrorMessage(errorMessage: String) {
+        palettes.removeAll()
+        tableText.stringValue = errorMessage
+        view.addSubview(tableText)
+        tableText.layer?.pop_addAnimation(fadeAnimation, forKey: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+            self.tableView.layer?.pop_addAnimation(self.fadeReverseAnimation, forKey: nil)
+        })
     }
     
     func scrollViewDidScroll(notification: NSNotification) {
@@ -345,7 +343,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
 
         if !noResults && !scrolledToBottom && currentPosition > contentHeight - 2 {
             scrolledToBottom = true
-            resultsPage++
+            resultsPage = resultsPage + 1
             var params = lastParams
             params.updateValue(String(DefaultNumResults * resultsPage), forKey: "resultOffset")
             getPalettes(endpoint: lastEndpoint, params: params)
