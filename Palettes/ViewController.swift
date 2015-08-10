@@ -91,7 +91,11 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: NSViewController
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        if #available(OSX 10.10, *) {
+            super.viewDidLoad()
+        } else {
+            // Fallback on earlier versions
+        }
         
         let window = NSApplication.sharedApplication().windows[0] as NSWindow
         window.delegate = self
@@ -108,7 +112,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             copyType = lastCopyType
             let window = NSApplication.sharedApplication().windows[0] as NSWindow
             window.delegate = self
-            let popUpButton = window.toolbar?.items[1].view? as NSPopUpButton
+            let popUpButton = window.toolbar?.items[1].view as! NSPopUpButton
             popUpButton.selectItemAtIndex(copyType)
         }
     }
@@ -135,7 +139,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         // Create and get references to other important items
-        let cell = tableView.makeViewWithIdentifier(PaletteCellIdentifier, owner: self) as PaletteTableCellView
+        let cell = tableView.makeViewWithIdentifier(PaletteCellIdentifier, owner: self) as! PaletteTableCellView
         let paletteView = cell.paletteView
         let openButton = cell.openButton
         let palette = palettes[row]
@@ -144,7 +148,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         cell.textField?.stringValue = palette.title
         cell.colors = palette.colors
         cell.url = palette.url
-        cell.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .InVisibleRect | .MouseEnteredAndExited, owner: cell, userInfo: nil))
+        cell.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .InVisibleRect, .MouseEnteredAndExited], owner: cell, userInfo: nil))
         
         // Set cell's open button properties
         cell.openButton.wantsLayer = true
@@ -156,7 +160,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         paletteView.layer?.borderColor = PaletteViewBorderColor
         paletteView.layer?.borderWidth = CGFloat(PaletteViewBorderWidth)
         paletteView.subviews = []
-        paletteView.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: .ActiveAlways | .InVisibleRect | .CursorUpdate, owner: cell, userInfo: nil))
+        paletteView.addTrackingArea(NSTrackingArea(rect: NSZeroRect, options: [.ActiveAlways , .InVisibleRect ,.CursorUpdate], owner: cell, userInfo: nil))
         
         // Calculate width and height of each color view
         let colorViewWidth = ceil(paletteView.bounds.width / CGFloat(cell.colors.count))
@@ -211,7 +215,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         copiedViewTextField.drawsBackground = false
         copiedViewTextField.editable = false
         copiedViewTextField.selectable = false
-        copiedViewTextField.alignment = .CenterTextAlignment
+       // copiedViewTextField.alignment = .CenterTextAlignment
         copiedViewTextField.textColor = NSColor(rgba: CopiedViewTextColor)
         copiedViewTextField.font = NSFont.boldSystemFontOfSize(CGFloat(CopiedViewTextSize))
         copiedViewTextField.stringValue = CopiedViewText
@@ -231,36 +235,36 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableText.drawsBackground = false
         tableText.editable = false
         tableText.selectable = false
-        tableText.alignment = .CenterTextAlignment
+        //tableText.alignment = .CenterTextAlignment
         tableText.textColor = NSColor(rgba: TableTextColor)
         tableText.font = NSFont.boldSystemFontOfSize(CGFloat(TableTextSize))
     }
     
     func setupAnimations() {
         // Set up copied view animation
-        copiedViewAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
+        copiedViewAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as! POPAnimatableProperty
         copiedViewAnimation.toValue = CopiedViewAnimationToValue
         copiedViewAnimation.springBounciness = CGFloat(CopiedViewAnimationSpringBounciness)
         copiedViewAnimation.springSpeed = CGFloat(CopiedViewAnimationSpringSpeed)
         
         // Set up copied view reverse animation
-        copiedViewReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as POPAnimatableProperty
+        copiedViewReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerPositionY) as! POPAnimatableProperty
         copiedViewReverseAnimation.toValue = CopiedViewReverseAnimationToValue
         copiedViewReverseAnimation.springBounciness = CGFloat(CopiedViewReverseAnimationSpringBounciness)
         copiedViewReverseAnimation.springSpeed = CGFloat(CopiedViewReverseAnimationSpringSpeed)
         
         // Set up fade animation
-        fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as! POPAnimatableProperty
         fadeAnimation.fromValue = 0
         fadeAnimation.toValue = 1
         
         // Set up fade reverse animation
-        fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as! POPAnimatableProperty
         fadeReverseAnimation.fromValue = 1
         fadeReverseAnimation.toValue = 0
     }
     
-    func getPalettes(#endpoint: String, params: [String:String]?) {
+    func getPalettes(endpoint endpoint: String, params: [String:String]?) {
         // Add default keys to params
         var params = params
         if params == nil {
@@ -277,7 +281,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         // Make the request
         manager.GET(endpoint, parameters: params, success: { operation, responseObject in
             // Save the latest endpoint and params
-            self.lastEndpoint = "\(operation.request.URL.scheme!)://\(operation.request.URL.host!)\(operation.request.URL.path!)"
+           
+           
+            
+            self.lastEndpoint = operation.request.URL!.absoluteString
             self.lastParams = params!
             
             // Parse the response object

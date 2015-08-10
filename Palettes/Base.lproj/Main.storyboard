@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -327,8 +328,10 @@
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Palettes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" unifiedTitleAndToolbar="YES"/>
-                        <rect key="contentRect" x="550" y="393" width="476" height="270"/>
+                        <rect key="contentRect" x="550" y="393" width="320" height="800"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="320" height="800"/>
+                        <value key="maxSize" type="size" width="320" height="800"/>
                         <toolbar key="toolbar" implicitIdentifier="EB2C5CE8-533A-4ED5-9B79-B0E19AE7EED7" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="WE8-di-38p">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bfx-19-zJr"/>
@@ -337,7 +340,7 @@
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="96" height="22"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="0EP-dd-NY9">
-                                        <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="M9H-XO-qzA">
                                             <font key="font" metaFont="system"/>
@@ -354,7 +357,7 @@
                                     <size key="minSize" width="50" height="28"/>
                                     <size key="maxSize" width="100" height="28"/>
                                     <popUpButton key="view" verticalHuggingPriority="750" id="PZm-qo-CsQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="28"/>
+                                        <rect key="frame" x="0.0" y="14" width="100" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <popUpButtonCell key="cell" type="roundTextured" title="HEX" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="tye-Jv-6uX" id="l34-nj-cef">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -391,7 +394,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73" y="250"/>
+            <point key="canvasLocation" x="-4.5" y="514"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -408,6 +411,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="110" rowSizeStyle="automatic" viewBased="YES" id="PLA-IL-pFt" customClass="MainTableView" customModule="Palettes" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -494,7 +498,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73" y="701.5"/>
+            <point key="canvasLocation" x="360" y="324.5"/>
         </scene>
     </scenes>
 </document>

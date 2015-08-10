@@ -33,14 +33,14 @@ class PaletteTableCellView: NSTableCellView {
         
         // Set up fade animation
         fadeAnimation = POPBasicAnimation()
-        fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as! POPAnimatableProperty
         fadeAnimation.fromValue = 0
         fadeAnimation.toValue = 1
         fadeAnimation.duration = FadeAnimationDuration
         
         // Set up fade reverse animation
         fadeReverseAnimation = POPBasicAnimation()
-        fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as POPAnimatableProperty
+        fadeReverseAnimation.property = POPAnimatableProperty.propertyWithName(kPOPLayerOpacity) as! POPAnimatableProperty
         fadeReverseAnimation.fromValue = 1
         fadeReverseAnimation.toValue = 0
         fadeReverseAnimation.duration = FadeAnimationDuration
@@ -55,7 +55,7 @@ class PaletteTableCellView: NSTableCellView {
         let colorIndex = Int(floor((event.locationInWindow.x - colorStartX) / colorWidth))
         
         // Copy color to clipboard
-        let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as ViewController
+        let viewController = nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder?.nextResponder! as! ViewController
         let pasteboard = NSPasteboard.generalPasteboard()
         pasteboard.clearContents()
         pasteboard.writeObjects([ColorConverter.getColorString(index: viewController.copyType, rawHex: colors[colorIndex])])
