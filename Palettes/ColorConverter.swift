@@ -16,11 +16,11 @@ class ColorConverter: NSObject {
     
     // MARK: Functions
     
-    class func getColorString(#index: Int, rawHex: String) -> String {
+    class func getColorString(index index: Int, rawHex: String) -> String {
         let hex = "0x\(rawHex)".withCString { strtoul($0, nil, 16) }
-        var red = (hex & 0xFF0000) >> 16
-        var green = (hex & 0x00FF00) >> 8
-        var blue = (hex & 0x0000FF)
+        let red = (hex & 0xFF0000) >> 16
+        let green = (hex & 0x00FF00) >> 8
+        let blue = (hex & 0x0000FF)
         
         switch index {
         case CopyType.HEX.rawValue:
@@ -56,20 +56,20 @@ class ColorConverter: NSObject {
             let b = String(format: "%.3f", Float(blue) / 255)
             return "[UIColor colorWithRed:\(r) green:\(g) blue:\(b) alpha:1]"
         default:
-            println("New color type added?")
+            print("New color type added?")
             return ""
         }
     }
     
-    class func getHSLFromRGB(#red: UInt, green: UInt, blue: UInt) -> (h: Int, s: Int, l: Int) {
-        var r = CGFloat(red) / 255
-        var g = CGFloat(green) / 255
-        var b = CGFloat(blue) / 255
+    class func getHSLFromRGB(red red: UInt, green: UInt, blue: UInt) -> (h: Int, s: Int, l: Int) {
+        let r = CGFloat(red) / 255
+        let g = CGFloat(green) / 255
+        let b = CGFloat(blue) / 255
         let maxRGB = max(r, g, b)
         let minRGB = min(r, g, b)
         var h = (maxRGB + minRGB) / 2
         var s = h
-        var l = h
+        let l = h
         
         if minRGB == maxRGB {
             h = 0
@@ -85,7 +85,7 @@ class ColorConverter: NSObject {
             case b:
                 h = (r - g) / d + 4
             default:
-                println("Something bad happened...")
+                print("Something bad happened...")
             }
             h /= 6
         }
